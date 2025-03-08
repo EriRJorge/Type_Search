@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type_Search</title>
+    <style>
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="description" content="Type_Search is a custom search engine that uses Google's search results.">
+    <meta name="keywords" content="search engine, google search, custom search, type search">
+    <meta name="author" content="Type_Software">
+    <meta name="robots" content="index, follow">
+</head>
+<body>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="container">
+        <div class="search-header">
+            <h1>Type<span>_Search</span></h1>
+            <p>A Better Way to Use the Web</p>
+        </div>
+
+        <form id="searchForm" action="https://www.google.com/search" method="get" target="_blank">
+            <div class="search-box">
+                <input type="text" name="q" class="search-input" placeholder="Look it Up..." id="searchInput" autocomplete="off">
+                <button type="submit" class="search-button" id="searchButton">Search</button>
+            </div>
+        </form>
+
+        <div class="search-options">
+            <button type="button" class="search-option active" data-type="web">All</button>
+            <button type="button" class="search-option" data-type="images">Images</button>
+            <button type="button" class="search-option" data-type="news">News</button>
+            <button type="button" class="search-option" data-type="videos">Videos</button>
+            <button type="button" class="search-option" data-type="maps">Maps</button>
+            <button type="button" class="search-option" data-type="shopping">Shopping</button>
+            <button type="button" class="search-option" data-type="books">Books</button>
+            <button type="button" class="search-option" data-type="scholar">Scholar</button>
+        </div>
+
+        <div class="search-shortcuts">
+            <div class="shortcut-card" data-query="weather">
+                <i class="fas fa-cloud-sun"></i>
+                <span>Weather</span>
+            </div>
+            <div class="shortcut-card" data-query="news today">
+                <i class="fas fa-newspaper"></i>
+                <span>News</span>
+            </div>
+            <div class="shortcut-card" data-query="movies near me">
+                <i class="fas fa-film"></i>
+                <span>Movies</span>
+            </div>
+            <div class="shortcut-card" data-query="restaurants near me">
+                <i class="fas fa-utensils"></i>
+                <span>Food</span>
+            </div>
+            <div class="shortcut-card" data-query="translate">
+                <i class="fas fa-language"></i>
+                <span>Translate</span>
+            </div>
+            <div class="shortcut-card" data-query="flights">
+                <i class="fas fa-plane"></i>
+                <span>Flights</span>
+            </div>
+        </div>
+
+        <button id="settingsToggle" class="settings-toggle" type="button">
+            <i class="fas fa-cog"></i> Custom Search Settings
+        </button>
+
+        <div id="customSettings" class="custom-settings">
+            <div class="settings-header">
+                <h3>Search Settings</h3>
+                <button id="settingsClose" class="settings-close" type="button" aria-label="Close settings">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="settings-option">
+                <label for="resultCount">Results per page</label>
+                <select id="resultCount">
+                    <option value="10">10 (default)</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+
+            <div class="settings-option">
+                <label for="searchRegion">Search region</label>
+                <select id="searchRegion">
+                    <option value="">Global (default)</option>
+                    <option value="countryUS">United States</option>
+                    <option value="countryUK">United Kingdom</option>
+                    <option value="countryCA">Canada</option>
+                    <option value="countryAU">Australia</option>
+                    <option value="countryIN">India</option>
+                </select>
+            </div>
+
+            <div class="settings-option">
+                <label for="searchLanguage">Results language</label>
+                <select id="searchLanguage">
+                    <option value="">Any language</option>
+                    <option value="lang_en">English</option>
+                    <option value="lang_es">Spanish</option>
+                    <option value="lang_fr">French</option>
+                    <option value="lang_de">German</option>
+                    <option value="lang_ja">Japanese</option>
+                    <option value="lang_zh-CN">Chinese</option>
+                </select>
+            </div>
+
+            <div class="settings-option">
+                <label for="timePeriod">Time period</label>
+                <select id="timePeriod">
+                    <option value="">Any time</option>
+                    <option value="qdr:h">Past hour</option>
+                    <option value="qdr:d">Past 24 hours</option>
+                    <option value="qdr:w">Past week</option>
+                    <option value="qdr:m">Past month</option>
+                    <option value="qdr:y">Past year</option>
+                </select>
+            </div>
+
+            <div class="settings-option">
+                <label for="siteSearch">Site search (e.g., wikipedia.org)</label>
+                <input type="text" id="siteSearch" placeholder="Enter domain to search within">
+            </div>
+        </div>
+
+        <div id="searchHistory" class="search-history">
+            <h3>Recent Searches</h3>
+            <ul id="historyList" class="history-list">
+                <!-- History items will be inserted here -->
+            </ul>
+            <button id="clearHistory" class="clear-history" type="button">Clear search history</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Type_Search is not affiliated with Google. It uses Google's search engine with a custom interface.</p>
+        <p>© 2025 Type_Software | <a href="#" id="privacy-link">Privacy Policy</a> | <a href="#" id="terms-link">Terms of Service</a></p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
