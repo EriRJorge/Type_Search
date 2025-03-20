@@ -109,12 +109,34 @@ settingsClose.addEventListener('click', () => {
     customSettings.style.display = 'none';
 });
 
-// Add settings parameters to search
+// Helper function to add or update search parameters
+function addOrUpdateParameter(name, value) {
+    let input = document.querySelector(`input[name="${name}"]`);
+    if (input) {
+        input.value = value;
+    } else {
+        input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = value;
+        searchForm.appendChild(input);
+    }
+}
+
+// Fixed search form submission
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
     // Save search to history
     saveSearchToHistory(searchInput.value);
+    
+    // Clear any existing custom parameters
+    const hiddenInputs = searchForm.querySelectorAll('input[type="hidden"]:not([name="tbm"])');
+    hiddenInputs.forEach(input => {
+        if (!['tbm'].includes(input.name)) {
+            input.remove();
+        }
+    });
     
     // Add custom search parameters
     const numResults = resultCount.value;
@@ -134,40 +156,30 @@ searchForm.addEventListener('submit', (e) => {
     
     const time = timePeriod.value;
     if (time) {
-        addOrUpdateParameter('as_qdr', time);
+        addOrUpdateParameter('tbs', time);
     }
     
+    // Handle site search
     const site = siteSearch.value;
     if (site && site.trim() !== '') {
-        // Add site: operator to the search query
-        const currentQuery = searchInput.value;
-        searchInput.value = `${currentQuery} site:${site.trim()}`;
+        // Modify the query to include site: operator
+        const originalQuery = searchInput.value;
+        const siteQuery = `${originalQuery} site:${site.trim()}`;
+        
+        // Update the input value
+        searchInput.value = siteQuery;
     }
     
     // Submit the form
     searchForm.submit();
     
-    // Reset site search to not affect the displayed value
+    // Reset site search input display (visual only)
     if (site && site.trim() !== '') {
         setTimeout(() => {
             searchInput.value = searchInput.value.replace(` site:${site.trim()}`, '');
         }, 100);
     }
 });
-
-// Helper function to add or update search parameters
-function addOrUpdateParameter(name, value) {
-    let input = document.querySelector(`input[name="${name}"]`);
-    if (input) {
-        input.value = value;
-    } else {
-        input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = name;
-        input.value = value;
-        searchForm.appendChild(input);
-    }
-}
 
 // Shortcut cards
 shortcutCards.forEach(card => {
