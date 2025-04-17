@@ -268,12 +268,12 @@ clearHistory.addEventListener('click', () => {
 // Events for footer links
 document.getElementById('privacy-link').addEventListener('click', (e) => {
     e.preventDefault();
-    alert('Privacy Policy: Type_Search does not collect or store any personal data. Searches are sent directly to Google. Your search history is stored only in your browser\'s local storage and is not transmitted to our servers.');
+    alert('Privacy Policy: Type_Search and Type_Software does not collect or store any personal data. Searches are sent directly to Google. Your search history is stored only in your browser\'s local storage and is not transmitted to our servers.');
 });
 
 document.getElementById('terms-link').addEventListener('click', (e) => {
     e.preventDefault();
-    alert('Terms of Service: Type_Search is a demonstration project. It provides a custom interface for Google search but is not affiliated with or endorsed by Google. Use of this service is subject to Google\'s terms of service.');
+    alert('Terms of Service: Type_Search is an alternative Google Frontend Project. It provides a custom interface for Google search but is not affiliated with or endorsed by Google. Use of this service is subject to Google\'s terms of service.');
 });
 
 // Add keyboard shortcuts

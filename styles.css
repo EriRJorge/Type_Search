@@ -63,7 +63,7 @@ body {
 .search-button {
     position: absolute;
     right: 5px;
-    top: 5px;
+    top: 8px;
     background-color: #2c6bed;
     color: white;
     border: none;
